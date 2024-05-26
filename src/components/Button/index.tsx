@@ -6,7 +6,7 @@ interface Ibutton {
   func:(url?:string)=>void
 }
 
-const Button = ({value,func,dark=false }:Ibutton) => {
+const Button = ({value,func, dark=false }:Ibutton) => {
   return (
     <S.button onClick={()=>{func()}} $dark={dark}>{value}</S.button>
   )
