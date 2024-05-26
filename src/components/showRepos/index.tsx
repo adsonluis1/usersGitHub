@@ -13,7 +13,7 @@ interface Irepo {
   }
 
 interface IshowRepos {
-    featch:string
+    featch:string | undefined
 }
 
 const ShowRepos = ({featch}:IshowRepos) => {
@@ -34,18 +34,16 @@ const ShowRepos = ({featch}:IshowRepos) => {
               }
             }
           }
-
           getRepo()
-        
     },[featch])
+
+    console.log(repos)
   return (
     <>
     {repos.length >= 1 && !error &&
-        <>
         <S.section>
-            
-            {repos.map((repositorio:Irepo)=>[
-                <S.div>
+             {repos.map((repositorio:Irepo)=>[
+                <S.div key={repositorio.id}>
                     <S.divChild>
                         <S.a target="_blank" href={repositorio.html_url}>{repositorio.name}</S.a>
                         <S.p $borde={true} >{repositorio.private?'Private':'Public'}</S.p>
@@ -53,10 +51,14 @@ const ShowRepos = ({featch}:IshowRepos) => {
                     {repositorio.description != null && <S.p $borde={false}>{repositorio.description}</S.p>}
                     <S.p $borde={false}>Stars: {repositorio.stargazers_count}</S.p>
                     {repositorio.language != null && <S.p $borde={false}>{repositorio.language}</S.p>}
-                </S.div>
+                </S.div>   
             ])}
         </S.section>
-        </>
+    }
+    {repos.length == 0 && !error &&
+      <S.divError>
+        <S.h1>Nenhum repository encontrado</S.h1>
+      </S.divError>
     }
     </>
   )
