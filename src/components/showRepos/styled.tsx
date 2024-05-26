@@ -10,6 +10,16 @@ export const section = styled.section`
     padding: 10px;
 `
 
+export const divError = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+`
+
+export const h1 = styled.h1`
+    color: white;
+`
+
 export const h2 = styled.h2`
     font-size: 1.0em;
     font-weight: 500;
