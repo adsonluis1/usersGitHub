@@ -1,13 +1,17 @@
 import CardPerfils from '../CardPerfils'
+import Header from '../Header'
 import * as S from './styled'
 
 const Home = () => {
   return (
-    <S.main>
-        <S.section>
-          <CardPerfils />
-        </S.section>
-    </S.main>
+    <>
+      <Header />
+      <S.main>
+          <S.section>
+            <CardPerfils />
+          </S.section>
+      </S.main>
+    </>
   )
 }
 
