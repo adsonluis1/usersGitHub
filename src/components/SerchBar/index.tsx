@@ -1,11 +1,26 @@
+import { useState } from 'react'
+import { useFeatch } from '../../context/ValueFetch'
 import Button from '../Button'
 import * as S from './styled'
+import { useNavigate } from 'react-router-dom'
 
 const SearchBar = () => {
-    return (
+  const [user, setUser] = useState<string>('')
+  const {setFeatch} = useFeatch()
+  const navigate = useNavigate()  
+  
+  return (
     <S.div>
-      <S.input type='search' placeholder='Digite um nome de usuario'/>
-      <Button $dark={false} value='Buscar'/>
+      <input 
+      type='search' 
+      value={user} 
+      placeholder='Digite um nome de usuario'
+      onChange={(e)=>{setUser(e.target.value)}}
+      />
+      <Button func={()=>{
+        setFeatch(user)
+        navigate('/')
+        }} dark={false} value='Buscar'/>
     </S.div>
   )
 }
