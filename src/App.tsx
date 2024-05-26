@@ -1,17 +1,14 @@
 import { Route, Routes } from "react-router-dom"
-import Header from "./components/Header"
 import Home from "./components/home"
+import ShowPerfil from "./components/showPerfil"
 
 function App() {
-  
 
   return (
     <>
-      <Header />
-      <Home />
-
       <Routes>
-        <Route path="/"/>
+        <Route path="/" element={<Home />}/>
+        <Route path="/fetch" element={<ShowPerfil />}/>
       </Routes>
     </>
   )
