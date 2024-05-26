@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const section = styled.section`
     display:flex;
     flex-direction: row;
-    height: 100vh;
+    min-height: 100vh;
     gap: 50px;
     @media (max-width: 768px) {
         flex-direction: column;
