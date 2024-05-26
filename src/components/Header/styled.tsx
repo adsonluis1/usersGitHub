@@ -13,7 +13,7 @@ export const header = styled.header`
 
 export const h1 = styled.h1`
     font-size: clamp(1em,5vw,2.5em);
-
+    cursor: pointer;
     & span{
         font-weight: bolder;
         color: rgb(26, 35, 47);
