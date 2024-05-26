@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import * as S from './styled'
 import Button from '../Button'
+import { useNavigate } from 'react-router-dom'
+import { useFeatch } from '../../context/ValueFetch'
 
 
 interface Iuser {
@@ -27,6 +29,9 @@ interface Iuser {
 const CardPerfils = () => {
     const [users, setUsers] = useState<Iuser[] | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const navigate = useNavigate()
+    const {setFeatch} = useFeatch()
+
     useEffect(()=>{
         const getPerfils = async ()=>{
             try {
@@ -43,26 +48,33 @@ const CardPerfils = () => {
               
     },[])
     
-    const goHome = ()=>{
-        location.assign(location.href)
-    }
+   
 
     return (
     <>
         {error && 
         <S.divError>
             <S.headererror>{error}</S.headererror>
-            <Button func={goHome} dark={true} value='Voltar'/>
+            <Button func={()=>{
+                navigate('/')
+            }} dark={true} value='Voltar'/>
         </S.divError>
         }
-        {users && 
+        {users && users.length >= 1 ? 
             users.map((user:Iuser)=>[
                 <S.div key={user.id}>
                     <S.img src={user.avatar_url}/>
                     <S.h3>{user.login}</S.h3>
-                    <Button dark={false}  func={()=> window.location.href = user.html_url} value='Ir para o Perfil'/>
+                    <Button dark={false}  func={()=> {
+                        navigate('/fetch')
+                        setFeatch(user.login)
+                    }} value='Ir para o Perfil'/>
                 </S.div>
             ])
+            :
+            <S.divError>
+                <S.headererror>Algo deu errado</S.headererror>
+            </S.divError>
         }
     </>
   )
