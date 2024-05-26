@@ -19,7 +19,7 @@ const SearchBar = () => {
       />
       <Button func={()=>{
         setFeatch(user)
-        navigate('/')
+        navigate(`/fetch/${user}`)
         }} dark={false} value='Buscar'/>
     </S.div>
   )
