@@ -66,7 +66,7 @@ const CardPerfils = () => {
                     <S.img src={user.avatar_url}/>
                     <S.h3>{user.login}</S.h3>
                     <Button dark={false}  func={()=> {
-                        navigate('/fetch')
+                        navigate(`/fetch/${user.login}`)
                         setFeatch(user.login)
                     }} value='Ir para o Perfil'/>
                 </S.div>
