@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/react-vite'
+import {Meta, StoryObj} from '@storybook/react'
 
 import index from './index.tsx'
 

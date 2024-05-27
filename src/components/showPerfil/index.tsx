@@ -74,7 +74,7 @@ const ShowPerfil = () => {
       }
       {error && 
       <S.section>
-        <S.h1>{error.message}</S.h1>
+        <S.h1>{error}</S.h1>
       </S.section>
       }
 
