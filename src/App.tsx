@@ -8,7 +8,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/fetch" element={<ShowPerfil />}/>
+        <Route path="/fetch/:query" element={<ShowPerfil />}/>
       </Routes>
     </>
   )

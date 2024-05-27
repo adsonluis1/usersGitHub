@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { useFeatch } from "../../context/ValueFetch"
 import * as S from './styled'
 import ShowRepos from "../showRepos"
 import Header from "../Header"
+import { useParams } from "react-router-dom"
 
 interface Iuser {
   login:string
@@ -21,17 +21,24 @@ interface Iuser {
   following:number
 }
 
+
 const ShowPerfil = () => {
-    const {featch} = useFeatch() 
+    const {query} = useParams()
     const [user, setUser] = useState<Iuser | null>(null)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(()=>{
+        setError(null)
         const getPerfil= async ()=>{
             try {
-                const res = await fetch(`https://api.github.com/users/${featch}`)
+                const res = await fetch(`https://api.github.com/users/${query}`)
                 const dados = await res.json()
-                setUser(dados)
+                if(res.status != 200){
+                  setError(dados)
+                }
+                else if(res.status == 200){
+                  setUser(dados)
+                }
             } catch (error) {
                 if(typeof error === 'string'){
                   setError(error.toUpperCase())
@@ -41,11 +48,9 @@ const ShowPerfil = () => {
                 
             }
         }
-
-        getPerfil()
-       
-    },[featch])
-    
+         getPerfil()
+    },[query])
+    console.log(query)
     return (
       <>
       <Header />
@@ -59,9 +64,20 @@ const ShowPerfil = () => {
             {user.location != null && <S.p>{user.location}</S.p>}
             {user.bio != null && <S.p>{user.bio}</S.p>}
           </S.UserInfoDiv>
-          {featch && <ShowRepos featch={featch}/>} 
+          {query && <ShowRepos featch={query}/>} 
         </S.section>
       }
+      {!user && !error && 
+      <S.section>
+        <S.h1>Nenhum usuario encontrado</S.h1>
+      </S.section>
+      }
+      {error && 
+      <S.section>
+        <S.h1>{error.message}</S.h1>
+      </S.section>
+      }
+
       </>
   )
 }
